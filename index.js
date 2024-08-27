@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./static"));
 
-app.get("^/$| Capstone", (req, res) => {
+app.get("^/$| FitMatch", (req, res) => {
   res.status(200).sendFile(path.resolve("./static/html/index.html"));
 });
 
