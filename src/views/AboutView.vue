@@ -32,6 +32,7 @@
     </div>
     <div class="about-section2">
       <h2 class="display-2 text-center pt-5">Meet Some of Our Trainers</h2>
+<Slider />
     </div>
     <div class="about-section3">
       <div>
@@ -47,6 +48,16 @@
     </div>
   </div>
 </template>
+
+<script>
+import Slider from '@/components/Slider.vue';
+
+export default{
+  components: {
+    Slider
+  }
+}
+</script>
 
 <style scoped>
 #about-hero {
