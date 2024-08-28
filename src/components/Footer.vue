@@ -28,6 +28,7 @@ export default {
 #footer {
   /* background-color: #fffbfe; */
   backdrop-filter: blur(10px);
+  z-index: 1;
 }
 img[alt="footer-logo"] {
   width: 8rem;
