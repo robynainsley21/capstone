@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid p-3">
       <router-link class="navbar-brand" to="/">
-        <img src="" alt="logo" loading="lazy" />
+        <img src="https://robynainsley21.github.io/images/capstone/FitMatch-logo-removebg-preview.png" alt="logo" loading="lazy" />
       </router-link>
       <button
         class="navbar-toggler"
@@ -22,7 +22,7 @@
       >
         <div class="offcanvas-header">
           <router-link class="navbar-brand" to="/">
-            <img src="" alt="logo" loading="lazy" />
+            <img src="https://robynainsley21.github.io/images/capstone/FitMatch-logo-removebg-preview.png" alt="logo" loading="lazy" />
           </router-link>
           <button
             type="button"
@@ -37,7 +37,7 @@
               <router-link
                 class="nav-link font-weight-bold"
                 aria-current="page"
-                href="#landing"
+                href="/"
                 >Home</router-link
               >
             </li>
@@ -68,9 +68,12 @@
               >
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" aria-current="page" to="/userProfile"
-                ><i class="bi bi-person-circle"></i></router-link
-              >
+              <router-link
+                class="nav-link"
+                aria-current="page"
+                to="/userProfile"
+                ><i class="bi bi-person-circle"></i
+              ></router-link>
             </li>
           </ul>
         </div>
@@ -85,13 +88,13 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 img[alt="logo"] {
   width: 5rem;
 }
 
-i{
-    color: black;
-    background-color: ;
+i {
+  /* color: black; */
+  font-size: 2.5rem;
 }
 </style>

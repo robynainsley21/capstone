@@ -1,7 +1,43 @@
 *,
 *::after,
-*::before{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--text);
+  background-color: var(--background);
 }
+
+:root {
+  --text: #0c0c0c;
+  --primary: #9b3922;
+  --secondary: #f2613f;
+  --accent: #481e14;
+  --background: #fffbfe;
+}
+
+/*NAVBAR*/
+nav {
+  padding: 30px;
+}
+
+nav {
+    background-color: var(--accent);
+  
+    & ul {
+      & router-link.nav-link {
+        color: var(--background);
+        background-color: var(--accent);
+        margin: 1rem;
+        box-shadow: 0.1vw 0.1vw 0.1vw var(--primary);
+        transition: all 1s;
+        &:hover {
+          color: var(--primary);
+          box-shadow: unset;
+        }
+      }
+    }
+  }
+
+
+/*NAVBAR*/
