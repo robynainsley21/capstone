@@ -1,5 +1,9 @@
 <template>
   <div id="home">
+    <div class="home-content">
+      <h1>FitMatch</h1>
+      <button>Find your match</button>
+    </div>
     <div class="video-background">
       <video autoplay muted loop playsinline>
         <!-- Video for desktop -->
@@ -30,6 +34,7 @@ export default {
 <style scoped>
 #home {
   height: 100vh;
+  position: relative;
 }
 .video-background {
   position: fixed;
