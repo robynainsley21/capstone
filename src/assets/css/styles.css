@@ -17,27 +17,10 @@
 }
 
 /*NAVBAR*/
-nav {
-  padding: 30px;
-}
+/* nav {
+  backdrop-filter: blur(10px);
+} */
 
-nav {
-    background-color: var(--accent);
-  
-    & ul {
-      & router-link.nav-link {
-        color: var(--background);
-        background-color: var(--accent);
-        margin: 1rem;
-        box-shadow: 0.1vw 0.1vw 0.1vw var(--primary);
-        transition: all 1s;
-        &:hover {
-          color: var(--primary);
-          box-shadow: unset;
-        }
-      }
-    }
-  }
 
 
 /*NAVBAR*/
