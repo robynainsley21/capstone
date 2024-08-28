@@ -1,11 +1,13 @@
 <template>
-
-  <router-view/>
+  <div class="app">
+    <main class="container-fluid">
+      <router-view />
+    </main>
+  </div>
 </template>
 
+
 <style>
-
-
 nav {
   padding: 30px;
 }
