@@ -102,7 +102,10 @@ class Users {
         });
       });
     } catch (error) {
-      res.json({ status: 404, message: `Error with updating user: ${error.message}` });
+      res.json({
+        status: 404,
+        message: `Error with updating user: ${error.message}`,
+      });
     }
   }
   deleteUser(req, res) {
@@ -120,7 +123,10 @@ class Users {
         });
       });
     } catch (error) {
-      res.json({ status: 404, message: `Error with deleting user: ${error.message}` });
+      res.json({
+        status: 404,
+        message: `Error with deleting user: ${error.message}`,
+      });
     }
   }
   async loginUser(req, res) {
@@ -157,14 +163,12 @@ class Users {
         }
       });
     } catch (error) {
-        res.json({
-            status: 401,
-            message: `Error with login: ${error.message}`,
-          });
+      res.json({
+        status: 401,
+        message: `Error with login: ${error.message}`,
+      });
     }
   }
 }
 
-export {
-  Users
-}
+export { Users };
