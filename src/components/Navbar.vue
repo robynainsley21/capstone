@@ -112,7 +112,7 @@ i {
 
 nav {
   /* backdrop-filter: blur(10px); */
-
+z-index: 9;
   & ul {
     & router-link.nav-link {
       color: var(--background);
