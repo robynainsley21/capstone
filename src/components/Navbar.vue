@@ -2,7 +2,11 @@
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid p-3">
       <router-link class="navbar-brand" to="/">
-        <img src="https://robynainsley21.github.io/images/capstone/FitMatch-logo-removebg-preview.png" alt="logo" loading="lazy" />
+        <img
+          src="https://robynainsley21.github.io/images/capstone/FitMatch-logo-removebg-preview.png"
+          alt="logo"
+          loading="lazy"
+        />
       </router-link>
       <button
         class="navbar-toggler"
@@ -22,7 +26,11 @@
       >
         <div class="offcanvas-header">
           <router-link class="navbar-brand" to="/">
-            <img src="https://robynainsley21.github.io/images/capstone/FitMatch-logo-removebg-preview.png" alt="logo" loading="lazy" />
+            <img
+              src="https://robynainsley21.github.io/images/capstone/FitMatch-logo-removebg-preview.png"
+              alt="logo"
+              loading="lazy"
+            />
           </router-link>
           <button
             type="button"
@@ -37,7 +45,7 @@
               <router-link
                 class="nav-link font-weight-bold"
                 aria-current="page"
-                href="/"
+                to="/"
                 >Home</router-link
               >
             </li>
@@ -97,4 +105,25 @@ i {
   /* color: black; */
   font-size: 2.5rem;
 }
+
+/* #offcanvasNavbar{
+  backdrop-filter: blur(10px);
+} */
+
+nav {
+  /* backdrop-filter: blur(10px); */
+
+  & ul {
+    & router-link.nav-link {
+      color: var(--background);
+      transition: all 1s;
+      &:hover {
+        color: var(--primary);
+        box-shadow: unset;
+      }
+    }
+  }
+}
+
+
 </style>
