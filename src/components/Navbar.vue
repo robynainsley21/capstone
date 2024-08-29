@@ -1,6 +1,6 @@
 <template>
-  <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container-fluid p-3">
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container-fluid">
       <router-link class="navbar-brand" to="/">
         <img
           src="https://robynainsley21.github.io/images/capstone/FitMatch-logo-removebg-preview.png"
@@ -96,34 +96,32 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 img[alt="logo"] {
   width: 5rem;
 }
 
 i {
-  /* color: black; */
+  color: #481e14;
   font-size: 2.5rem;
 }
 
-/* #offcanvasNavbar{
-  backdrop-filter: blur(10px);
-} */
-
 nav {
-  /* backdrop-filter: blur(10px); */
-z-index: 9;
-  & ul {
-    & router-link.nav-link {
-      color: var(--background);
-      transition: all 1s;
-      &:hover {
-        color: var(--primary);
-        box-shadow: unset;
-      }
-    }
+  z-index: 9;
+  background-color: #f2613f;
+}
+
+.offcanvas-body .navbar-nav .nav-item .nav-link {
+  color: #481e14;
+
+  &:hover {
+    color: var();
+    box-shadow: unset;
   }
 }
 
-
+.navbar-nav {
+  align-items: center;
+  float: left;
+}
 </style>

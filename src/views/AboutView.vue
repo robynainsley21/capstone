@@ -4,9 +4,10 @@
       <div class="about-hero-text">
         <p>
           At FitMatch, we understand that reaching your fitness goals can be
-          challenging. Our platform is designed to simplify the process by connecting you with
-          experienced personal trainers who can provide personalized guidance
-          and support, whether you prefer online sessions or in-person training.
+          challenging. Our platform is designed to simplify the process by
+          connecting you with experienced personal trainers who can provide
+          personalized guidance and support, whether you prefer online sessions
+          or in-person training.
         </p>
       </div>
     </div>
@@ -41,15 +42,15 @@
         />
       </div>
       <div>
-       <p class="founders-text">
-        FitMatch was born out of a shared passion for fitness and a deep
-        understanding of the challenges that many people face on their journey
-        to better health. As founders who have personally struggled with
-        reaching our own fitness goals, we recognized the need for a solution
-        that makes fitness more accessible, personalized, and convenient for
-        everyone—regardless of their level of experience or how busy their lives
-        may be.
-       </p>
+        <p class="founders-text">
+          FitMatch was born out of a shared passion for fitness and a deep
+          understanding of the challenges that many people face on their journey
+          to better health. As founders who have personally struggled with
+          reaching our own fitness goals, we recognized the need for a solution
+          that makes fitness more accessible, personalized, and convenient for
+          everyone—regardless of their level of experience or how busy their
+          lives may be.
+        </p>
       </div>
     </div>
   </div>
@@ -76,7 +77,7 @@ export default {
   width: 100%;
 }
 .about-hero-text {
-  padding-top: 20%;
+  padding-top: 10%;
   height: 100%;
 }
 
@@ -86,6 +87,7 @@ export default {
   text-align: center;
   backdrop-filter: blur(15px);
   padding: 3rem;
+  color: #0c0c0c;
 }
 
 .about-section1 {
@@ -112,6 +114,7 @@ img[alt="section1-img"] {
 .about-section2 {
   background-color: #f2613f;
 }
+
 .about-section3 {
   height: 100vh;
   display: flex;
@@ -125,7 +128,7 @@ img[alt="section3-img"] {
   border-radius: 100%;
 }
 
-.founders-text{
+.founders-text {
   width: 65%;
   text-align: center;
   margin: auto;
@@ -133,6 +136,11 @@ img[alt="section3-img"] {
 
 /**mobile */
 @media screen and (max-width: 768px) {
+  .about-hero-text > p {
+    width: 90%;
+    padding: 10%;
+  }
+
   .about-section1 {
     display: flex;
     flex-direction: column;
@@ -152,8 +160,23 @@ img[alt="section3-img"] {
   .section1-item {
     width: 100%;
   }
-}
 
-@media screen and (min-width: 769px) {
+  .about-section3 {
+    height: auto;
+  }
+
+  .founders-text {
+    width: 80%;
+    margin: 2rem auto;
+  }
+
+  img[alt="section3-img"] {
+    width: 15rem;
+    margin-top: 2rem;
+  }
+
+  img[alt="section1-img"] {
+    margin-top: 2rem;
+  }
 }
 </style>
