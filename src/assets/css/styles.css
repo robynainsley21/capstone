@@ -8,8 +8,12 @@
   background-color: var(--background);
 }
 
-::-webkit-scrollbar{
-    display: none;
+::-webkit-scrollbar {
+  display: none;
+}
+
+body{
+  font-family: "Moderustic", sans-serif;
 }
 
 :root {
@@ -20,16 +24,3 @@
   --background: #fffbfe;
 }
 
-/*NAVBAR*/
-/* nav {
-  backdrop-filter: blur(10px);
-} */
-
-
-
-/*NAVBAR*/
-
-
-/* ABOUT PAGE */
-
-/* ABOUT PAGE */

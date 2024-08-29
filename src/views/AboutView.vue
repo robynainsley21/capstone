@@ -4,8 +4,7 @@
       <div class="about-hero-text">
         <p>
           At FitMatch, we understand that reaching your fitness goals can be
-          challenging, especially when you’re not sure where to start. Our
-          platform is designed to simplify the process by connecting you with
+          challenging. Our platform is designed to simplify the process by connecting you with
           experienced personal trainers who can provide personalized guidance
           and support, whether you prefer online sessions or in-person training.
         </p>
@@ -15,7 +14,6 @@
       <div class="section1-item">
         <img
           src="https://robynainsley21.github.io/images/capstone/sule-makaroglu-PnUYkTFkOD0-unsplash.jpg"
-          loading="lazy"
           alt="section1-img"
         />
       </div>
@@ -32,31 +30,39 @@
     </div>
     <div class="about-section2">
       <h2 class="display-2 text-center pt-5">Meet Some of Our Trainers</h2>
-<Slider />
+      <SliderComp />
     </div>
     <div class="about-section3">
       <div>
-        <img src="" alt="section3-img" loading="lazy" />
+        <img
+          src="https://robynainsley21.github.io/images/capstone/founders-img.jpg"
+          alt="section3-img"
+          loading="lazy"
+        />
       </div>
       <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-        consectetur deleniti at magni dolorem nobis est tempore minus iste
-        voluptate eaque adipisci ullam corporis eligendi ut aliquam, odit,
-        dolorum amet qui! Sint odio voluptatem, commodi modi eos iste enim
-        animi?
+       <p class="founders-text">
+        FitMatch was born out of a shared passion for fitness and a deep
+        understanding of the challenges that many people face on their journey
+        to better health. As founders who have personally struggled with
+        reaching our own fitness goals, we recognized the need for a solution
+        that makes fitness more accessible, personalized, and convenient for
+        everyone—regardless of their level of experience or how busy their lives
+        may be.
+       </p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Slider from '@/components/Slider.vue';
+import SliderComp from "@/components/Slider.vue";
 
-export default{
+export default {
   components: {
-    Slider
-  }
-}
+    SliderComp,
+  },
+};
 </script>
 
 <style scoped>
@@ -78,40 +84,76 @@ export default{
   width: 70%;
   margin: auto;
   text-align: center;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
   padding: 3rem;
 }
 
 .about-section1 {
   display: flex;
   align-items: center;
-  height: 100vh;
+  width: 100vw;
+  padding: 3rem;
 }
 
 .section1-item {
   width: 50%;
   display: flex;
   justify-content: center;
+
+  & p {
+    width: 90%;
+  }
 }
 
 img[alt="section1-img"] {
-  width: 80%;
+  width: 50%;
 }
 
 .about-section2 {
-  height: 100vh;
   background-color: #f2613f;
 }
 .about-section3 {
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
 }
 
-img[alt="section3-img"]{
+img[alt="section3-img"] {
+  width: 17rem;
   border-radius: 100%;
-  
+}
+
+.founders-text{
+  width: 65%;
+  text-align: center;
+  margin: auto;
+}
+
+/**mobile */
+@media screen and (max-width: 768px) {
+  .about-section1 {
+    display: flex;
+    flex-direction: column;
+    padding: 4%;
+
+    & img {
+      width: 15rem;
+    }
+
+    & p {
+      width: 80%;
+      text-align: center;
+      margin-top: 2rem;
+    }
+  }
+
+  .section1-item {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 769px) {
 }
 </style>
