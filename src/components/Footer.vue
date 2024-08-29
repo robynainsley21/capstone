@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-center align-items-center fixed-bottom" id="footer">
+  <div class="d-flex justify-content-center align-items-center sticky-bottom" id="footer">
     <div class="col-md-6 d-flex justify-content-center align-items-center">
       <img
         class=" "
