@@ -1,5 +1,7 @@
 import express from "express";
 import path from "path";
+import { userRouter } from "./controller/UserController.js";
+import { trainerRouter } from "./controller/ProductController.js";
 
 const app = express();
 const port = +process.env.PORT || 4000;
@@ -14,7 +16,8 @@ app.use((req, res, next) => {
 
   next();
 });
-
+app.use('/user', userRouter)
+app.use('/trainer', trainerRouter)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./static"));
