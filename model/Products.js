@@ -46,12 +46,12 @@ export class Trainers {
   addTrainer(req, res) {
     try {
       const strQry = `
-            INSERT INTO Trainers
-            SET ?;        
+            INSERT INTO Trainers (trainerID, trainerName, trainerSurname, specialties, emailAdd, trainerPass)
+            VALUES (?);        
         `;
 
       db.query(strQry, [req.body], (error) => {
-        if (error) throw new Error();
+        if (error) throw new Error(`Unable to add trainer: ${error.message}`);
         res.json({
           status: res.statusCode,
           message: "Trainer added successfully",
