@@ -51,7 +51,7 @@ export class Trainers {
         `;
 
       db.query(strQry, [req.body], (error) => {
-        if (error) throw new Error(`Unable to add trainer: ${error.message}`);
+        if (error) throw new Error();
         res.json({
           status: res.statusCode,
           message: "Trainer added successfully",
