@@ -4,7 +4,7 @@ import router from "@/router";
 import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
 
-const apiURL = "https://capstone-yv7i.onrender.com";
+const apiURL = "https://capstone-yv7i.onrender.com/";
 
 export default createStore({
   state: {
@@ -35,7 +35,7 @@ export default createStore({
   actions: {
     async fetchUsers({ commit }) {
       try {
-        let { users, message } = await axios.get(`${apiURL}/users`).data;
+        let { users, message } = await axios.get(`${apiURL}users`).data;
 
         if (users) commit("setUsers", users);
         else {
@@ -53,7 +53,7 @@ export default createStore({
     },
     async fetchUser({ commit }, id) {
       try {
-        let { user, message } = await axios.get(`${apiURL}/users/${id}`).data;
+        let { user, message } = await axios.get(`${apiURL}users/${id}`).data;
 
         if (user) commit("setUser", user);
         else {
@@ -71,7 +71,7 @@ export default createStore({
     },
     async fetchTrainers({ commit }) {
       try {
-        let { trainers, message } = await axios.get(`${apiURL}/trainers`).data;
+        let { trainers, message } = await axios.get(`${apiURL}trainers`).data;
 
         if (trainers) commit("setTrainers", trainers);
         else {
@@ -89,7 +89,7 @@ export default createStore({
     },
     async fetchTrainer({ commit }, id) {
       try {
-        let { trainer, message } = await axios.get(`${apiURL}/trainers/${id}`)
+        let { trainer, message } = await axios.get(`${apiURL}trainers/${id}`)
           .data;
 
         if (trainer) commit("setTrainer", trainer);
@@ -108,7 +108,7 @@ export default createStore({
     },
     async fetchCart({ commit }) {
       try {
-        let { cart, message } = await axios.get(`${apiURL}/cart`);
+        let { cart, message } = await axios.get(`${apiURL}cart`);
 
         if (cart) commit("setCart", cart);
         else {
@@ -127,7 +127,7 @@ export default createStore({
     async updateUser(context, payload) {
       try {
         const { message, error } = await (
-          await axios.patch(`${apiURL}/users/update/${payload.userID}`, payload)
+          await axios.patch(`${apiURL}users/update/${payload.userID}`, payload)
         ).data;
 
         if (message) context.dispatch("fetchUsers");
@@ -147,7 +147,7 @@ export default createStore({
     async registerUser(context, payload) {
       try {
         const { message, error, token } = await await axios.post(
-          `${apiURL}/users/register`,
+          `${apiURL}users/register`,
           payload
         ).data;
 
@@ -174,7 +174,7 @@ export default createStore({
     async deleteUser(context, id) {
       try {
         const { message, error } = await (
-          await axios.delete(`${apiURL}/users/delete/${id}`)
+          await axios.delete(`${apiURL}users/delete/${id}`)
         ).data;
 
         if (message) context.dispatch("fetchUsers");
@@ -194,7 +194,7 @@ export default createStore({
     async addTrainer(context, payload) {
       try {
         const { message } = await (
-          await axios.post(`${apiURL}/trainers/addTrainer`, payload)
+          await axios.post(`${apiURL}trainers/addTrainer`, payload)
         ).data;
 
         if (message) {
@@ -215,7 +215,7 @@ export default createStore({
       try {
         const { message } = await (
           await axios.patch(
-            `${apiURL}/trainers/update/${payload.trainerID}`,
+            `${apiURL}trainers/update/${payload.trainerID}`,
             payload
           )
         ).data;
@@ -237,7 +237,7 @@ export default createStore({
     async deleteTrainer(context, id) {
       try {
         const { message } = await (
-          await axios.delete(`${apiURL}/trainers/delete/${id}`)
+          await axios.delete(`${apiURL}trainers/delete/${id}`)
         ).data;
 
         if (message) {

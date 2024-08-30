@@ -1,15 +1,13 @@
 <template>
-    <div>
-all trainers
-    </div>
+  <div>
+    <h1 class="display-1 text-center mt-4">Our Trainers</h1>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "TrainerView"
-    }
+export default {
+  name: "TrainerView",
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style scoped></style>
