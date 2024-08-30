@@ -16,8 +16,8 @@ app.use((req, res, next) => {
 
   next();
 });
-app.use('/user', userRouter)
-app.use('/trainer', trainerRouter)
+app.use('/users', userRouter)
+app.use('/trainers', trainerRouter)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./static"));
