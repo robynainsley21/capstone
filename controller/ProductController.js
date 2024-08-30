@@ -15,15 +15,15 @@ trainerRouter.get('/:id', (req, res) => {
     trainers.fetchTrainer(req, res)
 })
 
-trainerRouter.post('/addTrainer', verifyToken, (req, res) => {
+trainerRouter.post('/addTrainer', (req, res) => {
     trainers.addTrainer(req, res)
 })
 
-trainerRouter.patch('/update/:id', verifyToken, (req, res) => {
+trainerRouter.patch('/update/:id', (req, res) => {
     trainers.updateTrainer(req, res)
 })
 
-trainerRouter.delete('/delete/:id', verifyToken, (req, res) => {
+trainerRouter.delete('/delete/:id', (req, res) => {
     trainers.deleteTrainer(req, res)
 })
 
