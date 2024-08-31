@@ -30,7 +30,7 @@ export class Trainers {
                 WHERE trainerID = ${req.params.id};
             `;
       db.query(strQry, (error, results) => {
-        if (error) throw new Error(`Unable to fetch trainer: ${error.message}`);
+        if (error) throw new Error(error.message);
         res.json({
           status: res.statusCode,
           result: results[0],
