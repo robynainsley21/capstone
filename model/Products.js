@@ -2,7 +2,7 @@ import { connection as db } from "../config/index.js";
 import { createToken } from "../middleware/AuthenticateUser.js";
 import { hash, compare } from "bcrypt";
 
-export class Trainers {
+class Trainers {
   fetchTrainers(req, res) {
     try {
       const strQry = `
@@ -111,3 +111,6 @@ export class Trainers {
     }
   }
 }
+
+
+export { Trainers };
