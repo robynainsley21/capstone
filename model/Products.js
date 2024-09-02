@@ -26,7 +26,7 @@ class Trainers {
   fetchTrainer(req, res) {
     try {
       const strQry = `
-                SELECT trainerID, trainerName, trainerSurname, specialties, emailAdd, trainerPass 
+                SELECT * 
                 FROM Trainers
                 WHERE trainerID = ${req.params.id};
             `;
