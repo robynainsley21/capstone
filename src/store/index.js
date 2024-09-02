@@ -69,11 +69,11 @@ export default createStore({
         });
       }
     },
-    async fetchTrainers({ commit }) {
+    async fetchTrainers(context) {
       try {
-        let { trainers, message } = await axios.get(`${apiURL}trainers`).data;
+        const { results, message } = await (await axios.get(`${apiURL}trainers`)).data;
 
-        if (trainers) commit("setTrainers", trainers);
+        if (results) context.commit("setTrainers", results);
         else {
           toast.error(`${message}`, {
             autoClose: 2000,
@@ -89,10 +89,10 @@ export default createStore({
     },
     async fetchTrainer({ commit }, id) {
       try {
-        let { trainer, message } = await axios.get(`${apiURL}trainers/${id}`)
+        let { results, message } = await axios.get(`${apiURL}trainers/${id}`)
           .data;
 
-        if (trainer) commit("setTrainer", trainer);
+        if (results) commit("setTrainer", results);
         else {
           toast.error(`${message}`, {
             autoClose: 2000,
