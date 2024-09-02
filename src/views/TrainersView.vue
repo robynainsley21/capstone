@@ -30,7 +30,14 @@
           <p>Specialty: {{ trainer.specialties }}</p>
         </template>
         <template #footer>
-          <router-link :to="{ name: 'SingleTrainerView', params:{id: trainer.trainerID}}"></router-link> <button class="button">Details</button>
+          <router-link
+            :to="{
+              name: 'trainersSingleView',
+              params: { id: trainer.trainerID },
+            }"
+            ><button class="button">Details</button></router-link
+          >
+
           <button class="button">Book</button>
         </template>
       </CardComp>
@@ -82,7 +89,7 @@ img[alt="profileIMG"] {
   margin: auto;
 }
 
-.card-title{
+.card-title {
   font-size: 2rem;
 }
 

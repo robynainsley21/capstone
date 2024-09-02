@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
@@ -17,7 +17,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "allTrainers" */ '../views/TrainersView.vue')
   },
   {
-    path: '/trainersSingleView',
+    path: '/trainersSingleView/:id',
     name: 'trainersSingleView',
     component: () => import(/* webpackChunkName: "trainersSingleView" */ '../views/TrainerSingleView.vue')
   },
@@ -50,7 +50,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 })
 
