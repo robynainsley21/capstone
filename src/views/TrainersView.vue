@@ -30,7 +30,7 @@
           <p>Specialty: {{ trainer.specialties }}</p>
         </template>
         <template #footer>
-          <button class="button">Details</button>
+          <router-link :to="{ name: 'SingleTrainerView', params:{id: trainer.trainerID}}"></router-link> <button class="button">Details</button>
           <button class="button">Book</button>
         </template>
       </CardComp>
