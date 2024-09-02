@@ -4,7 +4,7 @@ import router from "@/router";
 import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
 
-const apiURL = "https://capstone-yv7i.onrender.com/";
+const apiURL = "https://capstone-qbpc.onrender.com/";
 
 export default createStore({
   state: {
@@ -87,12 +87,14 @@ export default createStore({
         });
       }
     },
-    async fetchTrainer({ commit }, id) {
+    async fetchTrainer(context, id) {
       try {
-        let { results, message } = await axios.get(`${apiURL}trainers/${id}`)
+        const { result, message } = await (await axios.get(`${apiURL}trainers/${id}`))
           .data;
 
-        if (results) commit("setTrainer", results);
+        if (result){
+           context.commit("setTrainer", result);
+          }
         else {
           toast.error(`${message}`, {
             autoClose: 2000,

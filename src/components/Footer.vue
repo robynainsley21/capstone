@@ -1,6 +1,9 @@
 <template>
   <div id="footer">
-    <div class="d-flex justify-content-center align-items-center" id="footer-items">
+    <div
+      class="d-flex justify-content-center align-items-center"
+      id="footer-items"
+    >
       <div class="col-md-6 d-flex justify-content-center align-items-center">
         <img
           src="https://robynainsley21.github.io/images/capstone/FitMatch-logo-removebg-preview.png"
@@ -18,13 +21,18 @@
         </ul>
       </div>
     </div>
-    <p class="text-center">&copy; Copyright `${currentYear}`</p>
+    <p class="text-center">Robyn Carnow &copy; Copyright {{ cYear }}</p>
   </div>
 </template>
 
 <script>
 export default {
   name: "FooterComp",
+  data() {
+    return {
+      cYear: new Date().getUTCFullYear(),
+    };
+  },
 };
 </script>
 
@@ -65,7 +73,7 @@ ul li {
     flex-direction: column;
   }
 
-  #footer-items{
+  #footer-items {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
