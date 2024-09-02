@@ -16,6 +16,7 @@
         <img
           src="https://robynainsley21.github.io/images/capstone/sule-makaroglu-PnUYkTFkOD0-unsplash.jpg"
           alt="section1-img"
+          loading="lazy"
         />
       </div>
       <div class="section1-item">
