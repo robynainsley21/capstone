@@ -6,8 +6,8 @@ class Trainers {
   fetchTrainers(req, res) {
     try {
       const strQry = `
-                SELECT * FROM Trainers;
-            `;
+        SELECT * FROM Trainers;
+        `;
       db.query(strQry, (error, results) => {
         if (error)
           throw new Error(`Unable to fetch trainers: ${error.message}`);
@@ -26,11 +26,11 @@ class Trainers {
   fetchTrainer(req, res) {
     try {
       const strQry = `
-                SELECT * 
-                FROM Trainers
-                WHERE trainerID = ${req.params.id};
-            `;
-      db.query(strQry, (error, results) => {
+        SELECT * 
+        FROM Trainers
+        WHERE trainerID = ?;
+      `;
+      db.query(strQry, [req.params.id], (error, results) => {
         if (error) throw new Error(error.message);
         res.json({
           status: res.statusCode,
@@ -44,14 +44,24 @@ class Trainers {
       });
     }
   }
-  addTrainer(req, res) {
+  async addTrainer(req, res) {
     try {
+      const hashedPassword = await hash(req.body.trainerPass, 10);
+
       const strQry = `
-            INSERT INTO Trainers (trainerID, trainerName, trainerSurname, specialties, emailAdd, trainerPass)
-            VALUES (?);        
+        INSERT INTO Trainers (trainerID, trainerName, trainerSurname, specialties, emailAdd, trainerPass)
+        VALUES (?);        
         `;
 
-      db.query(strQry, [req.body], (error) => {
+        const values = [
+          req.body.trainerName,
+          req.body.trainerSurname,
+          req.body.specialties,
+          req.body.emailAdd,
+          hashedPassword,
+        ];
+
+      db.query(strQry, values, (error) => {
         if (error) throw new Error(`Unable to add trainer: ${error.message}`);
         res.json({
           status: res.statusCode,
@@ -68,9 +78,9 @@ class Trainers {
   updateTrainer(req, res) {
     try {
       const strQry = `
-            UPDATE Trainers
-            SET ?
-            WHERE trainerID = ${req.params.id};
+        UPDATE Trainers
+        SET ?
+        WHERE trainerID = ${req.params.id};
         `;
 
       db.query(strQry, [req.body], (error) => {
@@ -91,8 +101,8 @@ class Trainers {
   deleteTrainer(req, res) {
     try {
       const strQry = `
-            DELETE FROM Trainers
-            WHERE trainerID = ${req.params.id};
+        DELETE FROM Trainers
+        WHERE trainerID = ${req.params.id};
         `;
 
       db.query(strQry, (error) => {
