@@ -39,12 +39,21 @@ export default {
 <style scoped>
 #footer {
   /* background-color: #fffbfe; */
+  padding-top: 2rem;
+
   backdrop-filter: blur(10px);
   z-index: 1;
   position: sticky;
   display: flex;
   flex-direction: column;
 
+  &::before{
+    content: '';
+    width: 70%;
+    height: 1px;
+    background-color: #B0B5B3;
+    margin: auto;
+  }
   &:last-child {
     color: #9b3922;
   }

@@ -15,6 +15,11 @@ export default{
   components: {
     NavbarComp,
     FooterComp
+  },
+  computed: {
+    isAuthenticated(){
+      return !!localStorage.getItem('token')
+    }
   }
 }
 

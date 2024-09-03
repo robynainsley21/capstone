@@ -70,7 +70,7 @@
                 >Contact</router-link
               >
             </li>
-            <li class="nav-item">
+            <li v-if="isAdmin" class="nav-item">
               <router-link class="nav-link" aria-current="page" to="/admin"
                 >Admin</router-link
               >
@@ -93,6 +93,11 @@
 <script>
 export default {
   name: "NavbarComp",
+  computed: {
+    isAdmin() {
+      return localStorage.getItem('userRole') === 'admin';
+    }
+  }
 };
 </script>
 
