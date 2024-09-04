@@ -131,18 +131,18 @@ class Users {
   }
   async loginUser(req, res) {
     try {
-      const { emailAdd, userPass } = req.body;
+      const { emailAdd, userPass, userRole } = req.body;
       const strQry = `
             SELECT *
             FROM Users
             WHERE emailAdd = '${emailAdd}';
         `;
-      db.query(strQry, async (error, results) => {
-        if (error) throw new Error(`Unable to login: ${error}`);
+      db.query(strQry, [emailAdd, userRole], async (error, results) => {
+        if (error) throw new Error(`Unable to login: ${error.message}`);
         if (!results?.length) {
           res.json({
             status: 401,
-            message: "You provided the wrong email.",
+            message: "You provided the wrong email or role.",
           });
         } else {
           const isValidPass = await compare(userPass, results[0].userPass);
