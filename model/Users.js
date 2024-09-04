@@ -135,7 +135,8 @@ class Users {
       const strQry = `
             SELECT *
             FROM Users
-            WHERE emailAdd = '${emailAdd}';
+            WHERE emailAdd = '${emailAdd}'
+            AND userRole = '${userRole}';
         `;
       db.query(strQry, [emailAdd, userRole], async (error, results) => {
         if (error) throw new Error(`Unable to login: ${error.message}`);
