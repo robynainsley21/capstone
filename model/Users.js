@@ -153,6 +153,7 @@ class Users {
               token,
               result: results[0],
               message: `You have successfully logged in.`,
+              userRole: results[0].userRole,
             });
           } else {
             res.json({
