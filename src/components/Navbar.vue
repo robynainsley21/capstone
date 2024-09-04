@@ -75,14 +75,17 @@
                 >Admin</router-link
               >
             </li>
-            <li class="nav-item">
+            <div v-if="isLoggedIn">
+              <button class="login-btn" @click="handleSignOut">Sign Out</button>
+            </div>
+            <!-- <li class="nav-item">
               <router-link
                 class="nav-link"
                 aria-current="page"
                 to="/userProfile"
                 ><i class="bi bi-person-circle"></i
               ></router-link>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -95,7 +98,16 @@ export default {
   name: "NavbarComp",
   computed: {
     isAdmin() {
-      return localStorage.getItem('userRole') === 'admin';
+      return localStorage.getItem("userRole") === "admin";
+    },
+    isLoggedIn() {
+      console.log('user is logged in: ', this.$store.state.user !== null);
+      return this.$store.state.user !== null;
+    }
+  },
+  methods: {
+    handleSignOut() {
+      this.$store.dispatch('logoutUser');
     }
   }
 };
@@ -128,5 +140,19 @@ nav {
 .navbar-nav {
   align-items: center;
   float: left;
+}
+
+.login-btn {
+  width: 7rem;
+  padding: 10px;
+  background: #9b3922;
+  color: #fffbfe;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background: #f2613f;
 }
 </style>

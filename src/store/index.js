@@ -3,7 +3,10 @@ import axios from "axios";
 import router from "@/router";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
+// import { useCookies } from "vue3-cookies";
+// import { applyToken } from "@/service/AuthenticateUser.js"
 
+// const { cookies } = useCookies();
 const apiURL = "https://capstone-qbpc.onrender.com/";
 
 export default createStore({
@@ -21,13 +24,16 @@ export default createStore({
       state.users = value;
     },
     setUser(state, value) {
-      (state.user = value), (state.userRole = value.userRole);
+      state.user = value;
     },
     setTrainers(state, value) {
       state.trainers = value;
     },
     setTrainer(state, value) {
       state.trainer = value;
+    },
+    setUserRole(state, value) {
+      state.userRole = value ? value.userRole : null;
     },
     setCart(state, value) {
       state.cartItems.push(value);
@@ -73,29 +79,49 @@ export default createStore({
     async loginUser(context, payload) {
       try {
         const { data } = await axios.post(`${apiURL}users/login`, {
-          emailAdd: payload.emailAdd, 
-          userPass: payload.userPass, 
+          emailAdd: payload.emailAdd,
+          userPass: payload.userPass,
           userRole: payload.userRole,
         });
         console.log(data);
 
         if (data.token) {
           context.commit("setUser", data.user);
+          context.commit("setUserRole", data.userRole);
           localStorage.setItem("token", data.token);
-          localStorage.setItem("userRole", data.user.userRole);
+          localStorage.setItem("userRole", data.userRole);
 
           toast.success("Login successful!", {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
           });
-
-          router.push({ name: data.user.userRole === "admin" ? "admin" : "home" });
+          // cookies.set("LegitUser", { token, message, result });
+          // applyToken(token)
+          router.push({ name: data.userRole === "admin" ? "admin" : "home" });
         } else {
           toast.error(data.message || "Login failed.", {
             autoClose: 2000,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
+      } catch (error) {
+        toast.error(error.message, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      }
+    },
+    logoutUser({ commit }) {
+      try {
+        commit("setUser", null);
+        commit("setUserRole", null);
+        localStorage.removeItem("token");
+        localStorage.removeItem("userRole");
+        router.push({ name: "login" });
+        toast.success("Logout successful!", {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
       } catch (error) {
         toast.error(error.message, {
           autoClose: 2000,

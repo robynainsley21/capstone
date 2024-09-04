@@ -18,7 +18,7 @@
         </select>
       </div>
       <div class="button-container">
-        <button class="login-btn" type="submit">Sign Up</button>
+        <button class="login-btn" type="submit">Submit</button>
         <router-link to="/login"><button class="login-btn" type="submit">Login</button></router-link>
       </div>
     </form>
