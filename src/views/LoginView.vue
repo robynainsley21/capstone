@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <h2 class="text-center">Login</h2>
-    
+
     <form @submit.prevent="handleLogin">
       <div class="form-group">
         <label for="emailAdd">Email:</label>
@@ -18,12 +18,13 @@
           <option value="admin">Admin</option>
         </select>
       </div>
-     <div class="button-container">
+      <div class="button-container">
         <button class="login-btn" type="submit">Submit</button>
-        <router-link to="/signup"><button class="login-btn">Signup</button></router-link>
-     </div>
+        <router-link to="/signup"
+          ><button class="login-btn">Signup</button></router-link
+        >
+      </div>
     </form>
-
   </div>
 </template>
 
@@ -51,9 +52,9 @@ export default {
 </script>
 
 <style scoped>
-.button-container{
-    display: flex;
-    justify-content: space-between;
+.button-container {
+  display: flex;
+  justify-content: space-between;
 }
 .login-container {
   margin: 0 auto;
@@ -62,9 +63,9 @@ export default {
   border-radius: 8px;
 }
 
-form{
-    width: 400px;
-    margin: 0 auto;
+form {
+  width: 400px;
+  margin: 0 auto;
 }
 
 .form-group {
@@ -80,7 +81,7 @@ input {
   width: 100%;
   padding: 8px;
   border: none;
-  border-bottom: 1px solid #B0B5B3;
+  border-bottom: 1px solid #b0b5b3;
   border-radius: 0;
 }
 
