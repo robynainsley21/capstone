@@ -3,10 +3,10 @@ import axios from "axios";
 import router from "@/router";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
-// import { useCookies } from "vue3-cookies";
+import { useCookies } from "vue3-cookies";
 // import { applyToken } from "@/service/AuthenticateUser.js"
 
-// const { cookies } = useCookies();
+const { cookies } = useCookies();
 const apiURL = "https://capstone-qbpc.onrender.com/";
 
 export default createStore({
@@ -36,6 +36,9 @@ export default createStore({
       state.userRole = value ? value.userRole : null;
     },
     setCart(state, value) {
+      state.cartItems = value;
+    },
+    addToCart(state, value) {
       state.cartItems.push(value);
     },
   },
@@ -47,13 +50,13 @@ export default createStore({
         if (users) commit("setUsers", users);
         else {
           toast.error(`${message}`, {
-            autoClose: 2000,
+            autoClose: 3500,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
       } catch (error) {
         toast.error(`${error.message}`, {
-          autoClose: 2000,
+          autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
         });
       }
@@ -65,13 +68,13 @@ export default createStore({
         if (user) commit("setUser", user);
         else {
           toast.error(`${message}`, {
-            autoClose: 2000,
+            autoClose: 3500,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
       } catch (error) {
         toast.error(`${error.message}`, {
-          autoClose: 2000,
+          autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
         });
       }
@@ -88,11 +91,11 @@ export default createStore({
         if (data.token) {
           context.commit("setUser", data.user);
           context.commit("setUserRole", data.userRole);
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("userRole", data.userRole);
+          cookies.set("token", data.token);
+          cookies.set("userRole", data.userRole);
 
           toast.success("Login successful!", {
-            autoClose: 2000,
+            autoClose: 3500,
             position: toast.POSITION.BOTTOM_CENTER,
           });
           // cookies.set("LegitUser", { token, message, result });
@@ -100,13 +103,13 @@ export default createStore({
           router.push({ name: data.userRole === "admin" ? "admin" : "home" });
         } else {
           toast.error(data.message || "Login failed.", {
-            autoClose: 2000,
+            autoClose: 3500,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
       } catch (error) {
         toast.error(error.message, {
-          autoClose: 2000,
+          autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
         });
       }
@@ -115,16 +118,16 @@ export default createStore({
       try {
         commit("setUser", null);
         commit("setUserRole", null);
-        localStorage.removeItem("token");
-        localStorage.removeItem("userRole");
+        cookies.remove("token");
+        cookies.remove("userRole");
         router.push({ name: "login" });
         toast.success("Logout successful!", {
-          autoClose: 2000,
+          autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
         });
       } catch (error) {
         toast.error(error.message, {
-          autoClose: 2000,
+          autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
         });
       }
@@ -138,13 +141,13 @@ export default createStore({
         if (results) context.commit("setTrainers", results);
         else {
           toast.error(`${message}`, {
-            autoClose: 2000,
+            autoClose: 3500,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
       } catch (error) {
         toast.error(`${error.message}`, {
-          autoClose: 2000,
+          autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
         });
       }
@@ -159,13 +162,13 @@ export default createStore({
           context.commit("setTrainer", result);
         } else {
           toast.error(`${message}`, {
-            autoClose: 2000,
+            autoClose: 3500,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
       } catch (error) {
         toast.error(`${error.message}`, {
-          autoClose: 2000,
+          autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
         });
       }
@@ -177,12 +180,31 @@ export default createStore({
         if (cart) commit("setCart", cart);
         else {
           toast.error(`${message}`, {
-            autoClose: 2000,
+            autoClose: 3500,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
       } catch (error) {
         toast.error(`${error.message}`, {
+          autoClose: 3500,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      }
+    },
+    async addToCart(context, payload) {
+      try {
+        const currentCart = cookies.get("userCart") || [];
+
+        const updateCart = [...currentCart, payload];
+        context.commit("setCart", updateCart);
+        cookies.set("userCart", updateCart, { expires: "7d" });
+
+        toast.success("Item added to cart!", {
+          autoClose: 3500,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      } catch (error) {
+        toast.error("Failed to add booking to cart.", {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER,
         });
@@ -197,13 +219,13 @@ export default createStore({
         if (message) context.dispatch("fetchUsers");
         else {
           toast.error(`${error}`, {
-            autoClose: 2000,
+            autoClose: 3500,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
       } catch (error) {
         toast.error(`${error.message}`, {
-          autoClose: 2000,
+          autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
         });
       }
@@ -214,19 +236,19 @@ export default createStore({
 
         if (data.token) {
           toast.success("Registration successful! Please login.", {
-            autoClose: 2000,
+            autoClose: 3500,
             position: toast.POSITION.BOTTOM_CENTER,
           });
           router.push({ name: "login" });
         } else {
           toast.error(data.message || "Registration failed.", {
-            autoClose: 2000,
+            autoClose: 3500,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
       } catch (error) {
         toast.error(error.message, {
-          autoClose: 2000,
+          autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
         });
       }
@@ -240,13 +262,13 @@ export default createStore({
         if (message) context.dispatch("fetchUsers");
         else {
           toast.error(`${error}`, {
-            autoClose: 2000,
+            autoClose: 3500,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
       } catch (error) {
         toast.error(`${error.message}`, {
-          autoClose: 2000,
+          autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
         });
       }
@@ -260,13 +282,13 @@ export default createStore({
         if (message) {
           context.dispatch("fetchTrainers");
           toast.success(`${message}`, {
-            autoClose: 2000,
+            autoClose: 3500,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
       } catch (error) {
         toast.error(`${error.message}`, {
-          autoClose: 2000,
+          autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
         });
       }
@@ -283,13 +305,13 @@ export default createStore({
         if (message) {
           context.dispatch("fetchTrainers");
           toast.success(`${message}`, {
-            autoClose: 2000,
+            autoClose: 3500,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
       } catch (error) {
         toast.error(`${error.message}`, {
-          autoClose: 2000,
+          autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
         });
       }
@@ -303,13 +325,13 @@ export default createStore({
         if (message) {
           context.dispatch("fetchTrainers");
           toast.success(`${message}`, {
-            autoClose: 2000,
+            autoClose: 3500,
             position: toast.POSITION.BOTTOM_CENTER,
           });
         }
       } catch (error) {
         toast.error(`${error.message}`, {
-          autoClose: 2000,
+          autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
         });
       }
