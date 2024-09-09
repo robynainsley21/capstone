@@ -38,7 +38,7 @@
             ><button class="button">Details</button></router-link
           >
 
-          <button class="button">Book</button>
+          <button @click="addToCart(trainer)" class="button">Book</button>
         </template>
       </CardComp>
     </div>
@@ -61,6 +61,11 @@ onMounted(() => {
   store.dispatch("fetchTrainers");
   console.log(trainers.value);
 });
+
+const addToCart = (trainer) => {
+  store.dispatch("addToCart", trainer);
+  console.log(trainer);
+};
 </script>
 
 <style scoped>
