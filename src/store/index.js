@@ -15,7 +15,7 @@ export default createStore({
     userRole: null,
     trainers: null,
     trainer: null,
-    cartItems: JSON.parse(cookies.get("userCart")) || [],
+    // cartItems: JSON.parse(cookies.get("userCart")) || [],
   },
   getters: {},
   mutations: {

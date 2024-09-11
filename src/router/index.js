@@ -1,4 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useCookies } from "vue3-cookies";
+
+const { cookies } = useCookies();
 
 const routes = [
   {
@@ -21,7 +24,7 @@ const routes = [
       import(/* webpackChunkName: "allTrainers" */ "../views/TrainersView.vue"),
     meta: { requiresAuth: true },
   },
-  
+
   {
     path: "/trainersSingleView/:id",
     name: "trainersSingleView",
@@ -71,14 +74,14 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-  const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin);
+  const requiresAdmin = to.matched.some((record) => record.meta.requiresAdmin);
 
-  const userToken = localStorage.getItem("token");
-  const userRole = localStorage.getItem('role');
+  const userToken = cookies.get("token");
+  const userRole = cookies.get("role");
 
   if (requiresAuth && !userToken) {
     next({ name: "login" });
-  } else if (requiresAdmin && userRole !== 'admin') {
+  } else if (requiresAdmin && userRole !== "admin") {
     next({ name: "home" });
   } else {
     next();
