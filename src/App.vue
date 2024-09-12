@@ -11,16 +11,20 @@
 <script>
 import NavbarComp from './components/Navbar.vue';
 import FooterComp from './components/Footer.vue';
+// import { useCookies } from 'vue3-cookies';
+// import { mapActions } from 'vuex';
 export default{
   components: {
     NavbarComp,
     FooterComp
   },
-  computed: {
-    isAuthenticated(){
-      return !!localStorage.getItem('token')
-    }
-  }
+
+  // computed: {
+  //   isAuthenticated(){
+  //     const { cookies } = useCookies();
+  //     return !!cookies.get('token')
+  //   }
+  // }
 }
 
 </script>

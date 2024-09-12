@@ -4,9 +4,11 @@ import router from "@/router";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import { useCookies } from "vue3-cookies";
+// import { applyToken } from "@/service/AuthenticateUser.js"
 
 const { cookies } = useCookies();
-const apiURL = "http://localhost:3001/";
+const apiURL = "https://capstone-qbpc.onrender.com/";
+// const apiURL = "http://localhost:3001/"
 
 export default createStore({
   state: {
@@ -15,7 +17,13 @@ export default createStore({
     userRole: null,
     trainers: null,
     trainer: null,
-    // cartItems: JSON.parse(cookies.get("userCart")) || [],
+    cartItems: (() => {
+      try {
+        return JSON.parse(cookies.get("userCart")) || [];
+      } catch (e) {
+        return [];
+      }
+    })(),
   },
   getters: {},
   mutations: {
@@ -35,13 +43,10 @@ export default createStore({
       state.userRole = value ? value.userRole : null;
     },
     setCart(state, value) {
-      console.log("setting cart: ", value);
-      if (value) {
-        state.cartItems?.push(value);
-      }
+      state.cartItems = value;
     },
     addToCart(state, value) {
-      state.cartItems?.push(value);
+      state.cartItems.push(value);
     },
   },
   actions: {
@@ -175,9 +180,12 @@ export default createStore({
         });
       }
     },
-    async fetchCart(context) {
+    async fetchCart() {
       try {
-        context.state.cartItems = JSON.parse(cookies.get("userCart"));
+        console.log(this.state.cartItems);
+        /**returns the cart correctly but disappears when page refreshes */
+          return this.state.cartItems       
+         
       } catch (error) {
         toast.error(`${error.message}`, {
           autoClose: 3500,
@@ -187,51 +195,45 @@ export default createStore({
     },
     async addToCart(context, payload) {
       try {
-        console.log(context.state.cartItems);
+        const currentCart = this.state.cartItems;
 
-        if (context.state.cartItems) {
-          context.state.cartItems.push(payload);
-        } else {
-          context.commit("setCart", payload);
-        }
+        const updateCart = [...currentCart, payload];
+        context.commit("setCart", updateCart);
+        cookies.set("userCart", updateCart, { expires: "7d" });
 
-        cookies.set("userCart", JSON.stringify(context.state.cartItems), {
-          expires: "7d",
-        });
         toast.success("Item added to cart!", {
           autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
         });
       } catch (error) {
         toast.error("Failed to add booking to cart.", {
-          autoClose: 2000,
+          autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
         });
       }
     },
-    async deleteCartItem(context, payload){
+    async deleteCartItem(context, payload) {
       try {
-        const currentCart = JSON.parse(cookies.get("userCart"));
-        const updatedCart = currentCart.filter(item => item.trainerID !== payload);
-
-        context.commit("setCart", updatedCart)
-        cookies.set("userCart", updatedCart, { expires: "7d" });
+        let currentCart = context.state.cartItems;
+        currentCart = currentCart.filter((item) => item.trainerID !== payload);
+        context.commit("setCart", currentCart);
+        cookies.set("userCart", currentCart, { expires: "7d" });
 
         toast.success("Item removed from cart!", {
           autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
-        });
+        })
       } catch (error) {
-        toast.error(`${error.message}`, {
+        toast.error("Failed to remove item from cart.", {
           autoClose: 3500,
           position: toast.POSITION.BOTTOM_CENTER,
-        });
+        })
       }
     },
     async updateUser(context, payload) {
       try {
         const { message, error } = await (
-          await axios.patch(`${apiURL}users/update/${payload.userID}`, payload)
+          await axios.patch(`${apiURL}users/update/${payload}`, payload)
         ).data;
 
         if (message) context.dispatch("fetchUsers");
@@ -277,7 +279,7 @@ export default createStore({
           await axios.delete(`${apiURL}users/delete/${id}`)
         ).data;
 
-        if(message) context.dispatch("fetchUsers");        
+        if (message) context.dispatch("fetchUsers");
         else {
           toast.error(`${error}`, {
             autoClose: 3500,
