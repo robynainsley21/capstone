@@ -78,14 +78,6 @@
             <div v-if="isLoggedIn">
               <button class="login-btn" @click="handleSignOut">Sign Out</button>
             </div>
-            <!-- <li class="nav-item">
-              <router-link
-                class="nav-link"
-                aria-current="page"
-                to="/userProfile"
-                ><i class="bi bi-person-circle"></i
-              ></router-link>
-            </li> -->
           </ul>
         </div>
       </div>
@@ -94,22 +86,25 @@
 </template>
 
 <script>
+import { useCookies } from "vue3-cookies";
+import { computed } from "vue";
+
 export default {
   name: "NavbarComp",
-  computed: {
-    isAdmin() {
-      return localStorage.getItem("userRole") === "admin";
-    },
-    isLoggedIn() {
-      console.log('user is logged in: ', this.$store.state.user !== null);
-      return this.$store.state.user !== null;
-    }
+  setup() {
+    const { cookies } = useCookies();
+
+    const isAdmin = computed(() => cookies.get("userRole") === "admin");
+    const isLoggedIn = computed(() => !!cookies.get("token"));
+
+    const handleSignOut = () => {
+      cookies.remove("token");
+      cookies.remove("userRole");
+      window.location.href = "/login";
+    };
+
+    return { isAdmin, isLoggedIn, handleSignOut };
   },
-  methods: {
-    handleSignOut() {
-      this.$store.dispatch('logoutUser');
-    }
-  }
 };
 </script>
 

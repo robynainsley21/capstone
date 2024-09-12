@@ -74,7 +74,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-  const requiresAdmin = to.matched.some((record) => record.meta.requiresAdmin);
+  const requiresAdmin = to.matched.some((record) => record.meta.requiresAdmin)
 
   const userToken = cookies.get("token");
   const userRole = cookies.get("role");
@@ -82,7 +82,7 @@ router.beforeEach((to, from, next) => {
   if (requiresAuth && !userToken) {
     next({ name: "login" });
   } else if (requiresAdmin && userRole !== "admin") {
-    next({ name: "home" });
+    if(userToken) next({ name: "home" });
   } else {
     next();
   }
