@@ -40,8 +40,8 @@ onMounted(() => {
 });
 
 const removeItem = (trainerID) => {
-    store.dispatch("deleteCartItem", trainerID)
-}
+  store.dispatch("deleteCartItem", trainerID);
+};
 
 console.log(cartItems.value);
 </script>
@@ -59,8 +59,8 @@ img[alt="cart-img"] {
   margin: 0.8rem;
 }
 
-.table-container tbody td{
-    padding-left: 0.5rem;
+.table-container tbody td {
+  padding-left: 0.5rem;
 }
 
 .table-container tbody td:last-child {
@@ -137,6 +137,12 @@ button:active:before {
     border-left: 1px solid var(--color);
     border-right: 1px solid var(--color);
     border-bottom: 1px solid var(--color);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  button{
+    margin-bottom: 1rem;
   }
 }
 </style>
