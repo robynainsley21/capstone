@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "axios": "^1.7.5",
     "bootstrap-icons": "^1.11.3",
     "cookies": "^0.9.1",
