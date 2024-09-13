@@ -7,6 +7,7 @@ import { useCookies } from "vue3-cookies";
 
 const { cookies } = useCookies();
 const apiURL = "http://localhost:3001/";
+// const apiURL = "https://capstone-qbpc.onrender.com/";
 
 export default createStore({
   state: {
@@ -15,7 +16,7 @@ export default createStore({
     userRole: null,
     trainers: null,
     trainer: null,
-    // cartItems: JSON.parse(cookies.get("userCart")) || [],
+    cartItems: [],
   },
   getters: {},
   mutations: {
@@ -43,6 +44,13 @@ export default createStore({
     addToCart(state, value) {
       state.cartItems?.push(value);
     },
+    removeUser(state, userID) {
+      if (Array.isArray(state.users)) {  // Ensure users is an array
+        state.users = state.users.filter(user => user.userID !== userID);
+      } else {
+        console.error("Error: state.users is not an array.");
+      }
+    }
   },
   actions: {
     async fetchUsers({ commit }) {
@@ -58,7 +66,7 @@ export default createStore({
         // }
         const response = await axios.get(`${apiURL}users`);
         console.log("API response:", response.data); // Log the API response
-        commit('setUsers', response.data);
+        commit("setUsers", response.data);
       } catch (error) {
         toast.error(`${error.message}`, {
           autoClose: 3500,
@@ -212,12 +220,14 @@ export default createStore({
         });
       }
     },
-    async deleteCartItem(context, payload){
+    async deleteCartItem(context, payload) {
       try {
         const currentCart = JSON.parse(cookies.get("userCart"));
-        const updatedCart = currentCart.filter(item => item.trainerID !== payload);
+        const updatedCart = currentCart.filter(
+          (item) => item.trainerID !== payload
+        );
 
-        context.commit("setCart", updatedCart)
+        context.commit("setCart", updatedCart);
         cookies.set("userCart", updatedCart, { expires: "7d" });
 
         toast.success("Item removed from cart!", {
@@ -276,17 +286,20 @@ export default createStore({
     },
     async deleteUser(context, id) {
       try {
-        const { message, error } = await (
+        const { message } = await (
           await axios.delete(`${apiURL}users/delete/${id}`)
         ).data;
 
-        if(message) context.dispatch("fetchUsers");        
-        else {
-          toast.error(`${error}`, {
-            autoClose: 3500,
-            position: toast.POSITION.BOTTOM_CENTER,
-          });
+        if (message) {
+          context.commit("removeUser", id);
+          context.dispatch("fetchUsers");
         }
+    //  else {
+    //       toast.error(`${error}`, {
+    //         autoClose: 3500,
+    //         position: toast.POSITION.BOTTOM_CENTER,
+    //       });
+    //     } 
       } catch (error) {
         toast.error(`${error.message}`, {
           autoClose: 3500,
@@ -317,11 +330,7 @@ export default createStore({
     async updateTrainer(context, payload) {
       try {
         const { message } = await (
-          await axios.patch(
-            `${apiURL}trainers/update/${payload.trainerID}`,
-            payload
-          )
-        ).data;
+          await axios.patch(`${apiURL}trainers/update/${payload.trainerID}`, payload)).data;
 
         if (message) {
           context.dispatch("fetchTrainers");

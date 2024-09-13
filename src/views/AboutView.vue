@@ -12,14 +12,14 @@
       </div>
     </div>
     <div class="about-section1">
-      <div class="section1-item">
+      <div class="section1-item" data-aos="fade-up">
         <img
           src="https://robynainsley21.github.io/images/capstone/sule-makaroglu-PnUYkTFkOD0-unsplash.jpg"
           alt="section1-img"
           loading="lazy"
         />
       </div>
-      <div class="section1-item">
+      <div class="section1-item" data-aos="fade-up">
         <p>
           Our intelligent matching algorithm pairs you with trainers who align
           with your specific fitness goals and preferences. Choose from a
@@ -35,14 +35,14 @@
       <SliderComp />
     </div>
     <div class="about-section3">
-      <div>
+      <div data-aos="fade-up">
         <img
           src="https://robynainsley21.github.io/images/capstone/founders-img.jpg"
           alt="section3-img"
           loading="lazy"
         />
       </div>
-      <div>
+      <div  data-aos="fade-up">
         <p class="founders-text">
           FitMatch was born out of a shared passion for fitness and a deep
           understanding of the challenges that many people face on their journey
