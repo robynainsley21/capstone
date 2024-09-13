@@ -3,6 +3,14 @@
     <h2>Sign Up</h2>
     <form @submit.prevent="handleSignup">
       <div class="form-group">
+        <label for="userName">Name:</label>
+        <input type="text" id="userName" v-model="userName" required />
+      </div>
+      <div class="form-group">
+        <label for="userSurname">Surname:</label>
+        <input type="text" id="userSurname" v-model="userSurname" required />
+      </div>
+      <div class="form-group">
         <label for="emailAdd">Email:</label>
         <input type="email" id="emailAdd" v-model="emailAdd" required />
       </div>
@@ -30,6 +38,8 @@ export default {
   name: "SignupView",
   data() {
     return {
+      userName: "",
+      userSurname: "",
       emailAdd: "",
       userPass: "",
       userRole: "user",
@@ -38,6 +48,8 @@ export default {
   methods: {
     handleSignup() {
       const payload = {
+        userName: this.userName,
+        userSurname: this.userSurname,
         emailAdd: this.emailAdd,
         userPass: this.userPass,
         userRole: this.userRole,

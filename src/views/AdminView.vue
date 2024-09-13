@@ -2,7 +2,9 @@
   <h1 class="display-1 text-center my-3">Admin</h1>
   <div id="trainers">
     <h2 class="display-5 text-center my-3">Trainers</h2>
-    <div class="text-center mb-2"><button class="addbtn">Add Trainer</button></div>
+    <div class="text-center mb-2">
+      <button class="addbtn">Add Trainer</button>
+    </div>
     <table class="table-container">
       <thead>
         <tr>
@@ -40,22 +42,33 @@
   />
 
   <div id="users">
-    <h2 class="display-5 text-center my-3">Users</h2>\
+    <h2 class="display-5 text-center my-3">Users</h2>
     <table class="table-container">
-      <thead >
+      <thead>
         <th>User ID</th>
+        <th>User Name</th>
+        <th>User Email</th>
         <th>User Password</th>
-
+        <th>Role</th>
+        <th>Delete</th>
       </thead>
-      <tbody v-show="users.length">
+      <tbody v-if="users?.length">
         <tr v-for="user in users" :key="user.userID">
-            <td>{{ user.userPass }}</td>
+          <td><span>User ID: </span>{{ user.userID }}</td>
+          <td>
+            <span>User Name: </span>{{ user.userName }} {{ user.userSurname }}
+          </td>
+          <td><span>User Email: </span>{{ user.emailAdd }}</td>
+          <td class="password text-center">
+            <p><span>User Password: </span>{{ user.userPass }}</p>
+          </td>
+          <td><span>User Role: </span>{{ user.userRole }}</td>
+          <td><button @click="deleteUser(user.userID)">Delete</button></td>
         </tr>
       </tbody>
-      <SpinnerComp v-show="!users.length" />
+      <SpinnerComp v-else />
     </table>
   </div>
-  <div id="admin"></div>
 </template>
 
 <script>
@@ -79,8 +92,8 @@ export default {
       return this.$store.state.trainers;
     },
     users() {
-      return this.$store.state.users;
-    }
+      return this.$store.state.users.results;
+    },
   },
   methods: {
     getTrainers() {
@@ -105,14 +118,17 @@ export default {
           .dispatch("deleteTrainer", id)
           .then(() => this.getTrainers());
       }
-    },    
-    getUsers() {
-        this.$store.dispatch("fetchUsers");
     },
+    getUsers() {
+      this.$store.dispatch("fetchUsers");
+    },
+    deleteUser(id){
+        this.$store.dispatch("deleteUser", id).then(() => this.getUsers());
+    }
   },
   mounted() {
     this.getTrainers();
-    this.getUsers()
+    this.getUsers();
   },
 };
 </script>
@@ -122,19 +138,18 @@ img[alt="trainer-img"] {
   width: 7rem;
 }
 
-.addbtn{
-    width: 9rem;
+.addbtn {
+  width: 9rem;
 }
 
-:is(#trainers, #users)::before{
-    content: '';
-    display: block;
-    width: 70%;
-    height: 1px;
-    background-color: #B0B5B3;
-    margin: 2rem auto;
-  }
-
+:is(#trainers, #users)::before {
+  content: "";
+  display: block;
+  width: 70%;
+  height: 1px;
+  background-color: #b0b5b3;
+  margin: 2rem auto;
+}
 
 .table-container {
   width: 90%;
@@ -203,11 +218,15 @@ button:active:before {
   transition: background 0s;
 }
 
-/**mobile */
-@media screen and (min-width: 768px) {
-    .addbtn{
-        margin: 1.5rem auto;
-    }
+/**desktop */
+@media screen and (min-width: 923px) {
+  .addbtn {
+    margin: 1.5rem auto;
+  }
+
+  span {
+    display: none;
+  }
 
   .table-container thead th {
     --color: #d4d4d4;
@@ -225,6 +244,46 @@ button:active:before {
     border-left: 1px solid var(--color);
     border-right: 1px solid var(--color);
     border-bottom: 1px solid var(--color);
+    padding: .5rem;
+  }
+}
+
+/**mobile */
+@media screen and (max-width: 923px) {
+  thead {
+    display: none;
+  }
+
+  tbody td {
+    /* display: block; */
+    text-align: center;
+    margin-bottom: 0.5rem;
+   
+  }
+
+  span {
+    font-weight: 700;
+    display: block;
+  }
+
+  .password > p {
+      width: 100%;
+      word-wrap: break-word; 
+      overflow-wrap: break-word;
+    }
+
+  tr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d4d4d4;
+    width: 80%;
+    margin: auto;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    box-sizing: border-box;
   }
 }
 </style>

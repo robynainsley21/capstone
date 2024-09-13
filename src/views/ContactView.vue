@@ -1,7 +1,7 @@
 <template>
   <h1 class="display-1 text-center m-4">Contact us.</h1>
   <div class="contact-container">
-    <div class="contact-info">
+    <div class="contact-info" data-aos="fade-right">
       <h3 class="display-6 fw-bold">Let's discuss fitness.</h3>
       <div class="contact-box">
         <p>Address:</p>
@@ -19,7 +19,7 @@
 
     <span class="divider"></span>
 
-    <div class="contact-form">
+    <div class="contact-form" data-aos="fade-left">
       <form
         action="https://formspree.io/f/meojdzza"
         method="POST"

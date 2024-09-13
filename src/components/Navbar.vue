@@ -72,8 +72,7 @@
             </li>
             <li v-if="isAdmin" class="nav-item">
               <router-link class="nav-link" aria-current="page" to="/admin"
-                >Admin</router-link
-              >
+                >Admin</router-link>
             </li>
             <div v-if="isLoggedIn">
               <button class="login-btn" @click="handleSignOut">Sign Out</button>

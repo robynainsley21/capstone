@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="running">
+    <div class="running text-center">
       <div class="outer">
         <div class="body">
           <div class="arm behind"></div>
@@ -28,14 +28,19 @@ export default {
   justify-content: center;
   align-items: center;
   height: 30vh;
+  margin: auto;
+  text-align: center;
 }
 .running .outer {
   -webkit-animation: outer var(--duration) linear infinite;
   animation: outer var(--duration) linear infinite;
+  margin: auto;
+  text-align: center;
 }
 .running .outer .body {
   background: var(--color);
   height: 15px;
+  margin: auto;
   width: 8px;
   border-radius: 4px;
   transform-origin: 4px 11px;

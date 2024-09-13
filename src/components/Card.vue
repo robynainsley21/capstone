@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card-comp col m-auto">
+    <div class="card-comp col m-auto" data-aos="fade-up">
       <div class="main">
         <div class="card-header">
           <slot name="header"></slot>
